@@ -28,9 +28,9 @@ class Kernel extends ConsoleKernel
         $schedule->call('App\Http\Controllers\InformationController@getXML'
             
         // Command ini akan dijalankan setiap 3 jam
-        // )->cron('0 */3 * * *');
+        )->cron('0 */3 * * *');
 
-        )->everyMinute();
+//         )->everyMinute();
     }
 
     /**

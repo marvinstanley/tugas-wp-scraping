@@ -16,6 +16,15 @@ class InformationController extends Controller
         //     $contents[] = $xml->channel->item[$i];
         // }
 
+        $rows   = array_map('str_getcsv', file('links.csv'));
+        $header = array_shift($rows);
+        $csv    = array();
+        foreach($rows as $row) {
+            $csv[] = array_combine($header, $row);
+        }
+
+        echo $csv;
+
         $data = Information::orderBy('created_at', 'desc')->paginate(8);
         return view('welcome', [
             'contents' => $data,

@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $html = "";
+
             $url = "http://rss.detik.com/index.php/detikcom_nasional";
             $contents = array();
             $xml = simplexml_load_file($url);

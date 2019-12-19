@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'InformationController@index');
+Route::get('/reload', 'InformationController@getXML');

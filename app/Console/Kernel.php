@@ -25,24 +25,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-
-            $url = "http://rss.detik.com/index.php/detikcom_nasional";
-            $contents = array();
-            $xml = simplexml_load_file($url);
-            for($i = 0; $i < 8; $i++) {
-                $content = $xml->channel->item[$i];
-                $data = new Information;
-                $data->title = $content->title;
-                $data->thumbnail = substr($content->description, 10 , strpos($content->description, "\" align=\"left\" hspace=\"7\" width=\"100\" />") - 10 );
-                $data->description = substr($content->description, strpos($content->description, "/>")+2 , strlen($content->description)-strpos($content->description,"/>") );
-                $data->links = $content->link;
-                $data->save();
-            }
+        $schedule->call('App\Http\Controllers\InformationController@getXML'
+            
         // Command ini akan dijalankan setiap 3 jam
-        })->cron('0 */3 * * *');
+        // )->cron('0 */3 * * *');
 
-        // })->everyMinute();
+        )->everyMinute();
     }
 
     /**
